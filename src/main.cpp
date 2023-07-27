@@ -10,7 +10,7 @@ using namespace std::chrono;
 int main(int argc, char **argv) {
 
 
-	cout << "SIMULATED ANNEALING [STAND-ALONE VERSION - v20230513]\n" << endl;
+	cout << "SIMULATED ANNEALING [STAND-ALONE VERSION - v20230623]\n" << endl;
 
 
 	// ==== initialize RNG ====
