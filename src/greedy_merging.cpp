@@ -13,8 +13,9 @@ void greedy_merging(Partition &p_struct) {
 
         best_delta = 0;
         double best_merge = 0;
-        unsigned int best_i, best_j, last_i;
-        __uint128_t best_community;
+        unsigned int best_i, best_j, last_i ;
+        best_i = best_j = last_i = 0;
+        __uint128_t best_community = 0;
 
         for (unsigned int i = 0; i < p_struct.n; i++){
             for (unsigned int j = i + 1; j < p_struct.n; j++){
