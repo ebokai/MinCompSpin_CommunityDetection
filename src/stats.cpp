@@ -4,7 +4,6 @@ map<__uint128_t, unsigned int> build_pdata(vector<pair<__uint128_t, unsigned int
 
     map<__uint128_t, unsigned int> pdata;
     __uint128_t mask_state;
-    vector<unsigned int> kset;
 
     for (auto const &it : data) {
         mask_state = ((it).first) & community;
@@ -22,7 +21,6 @@ double icc_evidence(__uint128_t community, Partition &p_struct){
     map<__uint128_t, unsigned int> pdata = build_pdata(p_struct.data, community);
     unsigned int rank = bit_count(community);
     
-
     if (rank > 32) {
         pf = -((double) rank - 1.) * p_struct.N * log(2);
     } else {
@@ -32,7 +30,7 @@ double icc_evidence(__uint128_t community, Partition &p_struct){
 
     logE += pf;
     for (auto const &pstate : pdata) {
-        logE += lgamma((pstate).second + 0.5) - lgamma(0.5);
+        logE += lgamma((pstate).second + 0.5) - SQRT_PI;
     }
 
     return logE;

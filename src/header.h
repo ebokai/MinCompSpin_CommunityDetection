@@ -14,6 +14,7 @@ const __uint128_t ONE = 1; // 128-bit representation of 1
 const __uint128_t ZERO = 0;
 const __uint128_t NOT_ZERO = ~0; // 128-bit integer containing only ones
 const double EPSILON = 1e-4; // minimum change in log-evidence 
+const double SQRT_PI = lgamma(0.5);
 
 struct Partition {
 
