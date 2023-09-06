@@ -1,20 +1,28 @@
 #include "header.h"
 
-map<__uint128_t, unsigned int> build_pdata(map<__uint128_t, unsigned int> &data, __uint128_t community) {
+// map<__uint128_t, unsigned int> build_pdata(map<__uint128_t, unsigned int> &data, __uint128_t community) {
+
+map<__uint128_t, unsigned int> build_pdata(vector<pair<__uint128_t, unsigned int>> &data, __uint128_t community) {
 
     map<__uint128_t, unsigned int> pdata;
-    map<__uint128_t, unsigned int>::iterator it;
+    // map<__uint128_t, unsigned int>::iterator it;
 
-    unsigned int ks;
-    __uint128_t state, mask_state;
+    // unsigned int ks;
+    // __uint128_t state, mask_state;
+    __uint128_t mask_state;
 
-    for (it = data.begin(); it != data.end(); it++) {
+    // for (it = data.begin(); it != data.end(); it++) {
 
-        state = it -> first;
-        ks = it -> second;
+    //     state = it -> first;
+    //     ks = it -> second;
 
-        mask_state = state & community;
-        pdata[mask_state] += ks;
+    //     mask_state = state & community;
+    //     pdata[mask_state] += ks;
+    // }
+
+    for (auto const &it : data) {
+        mask_state = ((it).first) & community;
+        pdata[mask_state] += ((it).second);
     }
 
     return pdata;
