@@ -7,14 +7,17 @@ void greedy_merging(Partition &p_struct) {
     double best_delta = 1;
     map<__uint128_t, double> calculated_evidence;
     unsigned int depth = 0;
-    double delta_evidence;
+    double delta_evidence, unmerged_evidence, merged_evidence;
+    double best_merge;
+
+    unsigned int best_i, best_j, last_i;
+    best_i = best_j = last_i = 0;
 
     while (best_delta > 0) {
 
         best_delta = 0;
-        double best_merge = 0;
-        unsigned int best_i, best_j, last_i ;
-        best_i = best_j = last_i = 0;
+        best_merge = 0;
+        
         __uint128_t best_community = 0;
 
         for (unsigned int i = 0; i < p_struct.n; i++){
@@ -27,8 +30,8 @@ void greedy_merging(Partition &p_struct) {
                 if ((bit_count(ci) == 0) || (bit_count(cj) == 0)) {continue;}
 
                 if ((depth == 0) || (i == last_i) || (j == last_i)) {
-                    double unmerged_evidence = icc_evidence(ci, p_struct) + icc_evidence(cj, p_struct);
-                    double merged_evidence = icc_evidence(cij, p_struct);
+                    unmerged_evidence = icc_evidence(ci, p_struct) + icc_evidence(cj, p_struct);
+                    merged_evidence = icc_evidence(cij, p_struct);
                     delta_evidence = merged_evidence - unmerged_evidence;
                     __uint128_t identifier = (ONE << i) + (ONE << j);
                     calculated_evidence[identifier] = delta_evidence;           
