@@ -32,7 +32,6 @@ struct Partition {
 	__uint128_t occupied_partitions = 0; // occupied communities (with at least one node)
 	__uint128_t occupied_partitions_gt2_nodes = 0; // communities with at least two nodes (for split and switch)
 	
-	//map<__uint128_t, unsigned int> data;
 	vector<pair<__uint128_t, unsigned int>> data;
 	vector<__uint128_t> current_partition = vector<__uint128_t>(n);
 	vector<__uint128_t> best_partition = vector<__uint128_t>(n);
@@ -50,7 +49,7 @@ __uint128_t string_to_int(string nstring, unsigned int n);
 __uint128_t random_128_int(unsigned int k);
 
 // evidence calculation
-map<__uint128_t, unsigned int> build_pdata(map<__uint128_t, unsigned int> &data, __uint128_t community);
+map<__uint128_t, unsigned int> build_pdata(vector<pair<__uint128_t, unsigned int>> &data, __uint128_t community);
 double icc_evidence(__uint128_t community, Partition &p_struct);
 
 // partitions and data

@@ -85,5 +85,4 @@ void greedy_merging(Partition &p_struct) {
             }   
         }       
     }
-
 }
