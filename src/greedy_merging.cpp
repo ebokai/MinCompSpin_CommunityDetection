@@ -47,9 +47,7 @@ void greedy_merging(Partition &p_struct) {
                     best_j = j;
                     best_community = cij;
                 }
-
             }
-
         }
 
         // perform merge
@@ -65,12 +63,16 @@ void greedy_merging(Partition &p_struct) {
 
             p_struct.current_partition[best_i] = best_community;
             p_struct.current_partition[best_j] = 0;
+
             p_struct.best_partition[best_i] = best_community;
-            p_struct.best_partition[best_j] = 0;    
+            p_struct.best_partition[best_j] = 0; 
+
             p_struct.partition_evidence[best_i] = best_merge;
             p_struct.partition_evidence[best_j] = 0;
+
             p_struct.occupied_partitions -= (ONE << best_j);
             p_struct.current_log_evidence += best_delta;
+
             p_struct.best_log_evidence = p_struct.current_log_evidence;
 
             cout << "best log-evidence: " << p_struct.best_log_evidence << "\n" << endl;
