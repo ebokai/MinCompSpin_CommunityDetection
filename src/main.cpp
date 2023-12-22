@@ -118,6 +118,7 @@ int main(int argc, char **argv) {
     // main algorithm 
     if (anneal) {
         simulated_annealing(p_struct, max_iterations, max_no_improve);
+        greedy_merging(p_struct); // always run an additional greedy merging step
     }
     
 
