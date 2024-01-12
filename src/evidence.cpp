@@ -29,8 +29,9 @@ double icc_evidence(__uint128_t community, Partition &p_struct){
     }
 
     logE += pf;
-    for (auto const &pstate : pdata) {
-        logE += lgamma((pstate).second + 0.5) - SQRT_PI;
+    for (const auto &pstate : pdata) {
+        const auto &state = pstate;
+        logE += lgamma(state.second + 0.5) - SQRT_PI;
     }
 
     return logE;
