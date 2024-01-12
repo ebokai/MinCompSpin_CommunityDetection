@@ -52,6 +52,9 @@ __uint128_t random_128_int(unsigned int k);
 // evidence calculation
 map<__uint128_t, unsigned int> build_pdata(vector<pair<__uint128_t, unsigned int>> &data, __uint128_t community);
 double icc_evidence(__uint128_t community, Partition &p_struct);
+double get_evidence(__uint128_t community, 
+    map<__uint128_t, double> &evidence_memo,
+    Partition &p_struct);
 
 // partitions and data
 void get_data(string fname, Partition &p_struct);

@@ -3,7 +3,7 @@
 
 #include <ctime> // for chrono
 #include <ratio> // for chrono
-#include <chrono> // for chrono]
+#include <chrono> // for chrono
 
 using namespace std::chrono;
 
