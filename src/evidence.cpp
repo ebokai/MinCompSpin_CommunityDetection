@@ -35,3 +35,16 @@ double icc_evidence(__uint128_t community, Partition &p_struct){
 
     return logE;
 }
+
+double get_evidence(__uint128_t community, Partition &p_struct) {
+
+    double evidence;
+
+    auto check = p_struct.evidence_memo.find(community);
+    if (check != p_struct.evidence_memo.end()) {evidence = check->second;}
+    else {
+        evidence = icc_evidence(community, p_struct);
+        p_struct.evidence_memo[community] = evidence;
+        }
+    return evidence;
+}

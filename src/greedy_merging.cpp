@@ -25,17 +25,17 @@ void greedy_merging(Partition &p_struct) {
 
             __uint128_t ci = p_struct.current_partition[i];
             if (bit_count(ci) == 0) {continue;}
-            unmerged_evidence_i = get_evidence(ci, evidence_memo, p_struct);
+            unmerged_evidence_i = get_evidence(ci, p_struct);
 
             for (unsigned int j = i + 1; j < p_struct.n; j++){
 
                 __uint128_t cj = p_struct.current_partition[j];
                 if (bit_count(cj) == 0) {continue;}
-                unmerged_evidence_j = get_evidence(cj, evidence_memo, p_struct);
+                unmerged_evidence_j = get_evidence(cj, p_struct);
 
                 __uint128_t cij =  ci + cj;
 
-                merged_evidence = get_evidence(cij, evidence_memo, p_struct);
+                merged_evidence = get_evidence(cij, p_struct);
 
                 delta_evidence = merged_evidence - unmerged_evidence_i - unmerged_evidence_j;
 
@@ -65,7 +65,7 @@ void greedy_merging(Partition &p_struct) {
             p_struct.best_partition[best_i] = best_community;
             p_struct.best_partition[best_j] = 0; 
 
-            p_struct.partition_evidence[best_i] = get_evidence(best_community, evidence_memo, p_struct);
+            p_struct.partition_evidence[best_i] = get_evidence(best_community, p_struct);
             p_struct.partition_evidence[best_j] = 0;
 
             p_struct.occupied_partitions -= (ONE << best_j);
@@ -87,17 +87,3 @@ void greedy_merging(Partition &p_struct) {
     }
 }
 
-double get_evidence(__uint128_t community, 
-    map<__uint128_t, double> &evidence_memo,
-    Partition &p_struct) {
-
-    double evidence;
-
-    auto check = evidence_memo.find(community);
-    if (check != evidence_memo.end()) {evidence = check->second;}
-    else {
-        evidence = icc_evidence(community, p_struct);
-        evidence_memo[community] = evidence;
-        }
-    return evidence;
-}
