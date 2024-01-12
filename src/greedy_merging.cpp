@@ -27,10 +27,8 @@ void greedy_merging(Partition &p_struct) {
             if (bit_count(ci) == 0) {continue;}
             unmerged_evidence_i = get_evidence(ci, evidence_memo, p_struct);
 
-
             for (unsigned int j = i + 1; j < p_struct.n; j++){
 
-                
                 __uint128_t cj = p_struct.current_partition[j];
                 if (bit_count(cj) == 0) {continue;}
                 unmerged_evidence_j = get_evidence(cj, evidence_memo, p_struct);
@@ -40,7 +38,6 @@ void greedy_merging(Partition &p_struct) {
                 merged_evidence = get_evidence(cij, evidence_memo, p_struct);
 
                 delta_evidence = merged_evidence - unmerged_evidence_i - unmerged_evidence_j;
-
 
                 if (delta_evidence > best_delta) {
                     best_delta = delta_evidence;
