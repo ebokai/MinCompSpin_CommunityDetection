@@ -105,14 +105,13 @@ int main(int argc, char **argv) {
     	independent_partition(p_struct);
     }
 
+    auto start = chrono::system_clock::now();
+
     if (greedy) {
-        auto start = chrono::system_clock::now();
         greedy_merging(p_struct);
         cout << "- current log-evidence (after GMA): " << p_struct.current_log_evidence << endl;
         cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << endl;
-        auto end = chrono::system_clock::now();
-        chrono::duration<double> elapsed = end - start;
-        cout << "- elapsed time      : " << elapsed.count() << "s" << endl;
+        
     }
 
     // main algorithm 
@@ -120,6 +119,10 @@ int main(int argc, char **argv) {
         simulated_annealing(p_struct, max_iterations, max_no_improve);
         greedy_merging(p_struct); // always run an additional greedy merging step
     }
+
+    auto end = chrono::system_clock::now();
+    chrono::duration<double> elapsed = end - start;
+    cout << "- elapsed time      : " << elapsed.count() << "s" << endl;
     
 
     cout << "- current log-evidence (after SAA): " << p_struct.current_log_evidence << endl;
