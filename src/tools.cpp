@@ -1,3 +1,4 @@
+
 #include "header.h"
 
 
@@ -41,7 +42,7 @@ __uint128_t random_128_int(unsigned int k){
 }
 
 
-__uint128_t string_to_int(string nstring, unsigned int n) {
+__uint128_t string_to_int(const string nstring, unsigned int n) {
 
 	__uint128_t state, op;
 	char c = '1';

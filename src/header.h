@@ -1,12 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <bitset>
+#include <cmath>
 #include <random>
 #include <map>
 #include <unordered_map>
 #include <string>
 #include <fstream>
 #include <algorithm>
+#include <omp.h>
+#include <execution>
 
 using namespace std;
 
@@ -14,7 +17,10 @@ const __uint128_t ONE = 1; // 128-bit representation of 1
 const __uint128_t ZERO = 0;
 const __uint128_t NOT_ZERO = ~0; // 128-bit integer containing only ones
 const double EPSILON = 1e-4; // minimum change in log-evidence 
-const double SQRT_PI = lgamma(0.5);
+const double SQRT_PI = 0.5723649429; //lgamma(0.5);
+const double LOG2 = log(2.0);
+
+const double LGAMMA[10] = {0.572365, -0.120782, 0.284683, 1.20097, 2.45374, 3.95781, 5.66256, 7.53436, 9.54927, 11.6893};
 
 struct Partition {
 
@@ -48,11 +54,11 @@ bool DoubleSame(double a, double b);
 unsigned int bit_count(__uint128_t number);
 unsigned int randomBitIndex(__uint128_t number);
 string int_to_bitstring(__uint128_t number, unsigned int r);
-__uint128_t string_to_int(string nstring, unsigned int n);
+__uint128_t string_to_int(const string nstring, unsigned int n);
 __uint128_t random_128_int(unsigned int k);
 
 // evidence calculation
-map<__uint128_t, unsigned int> build_pdata(vector<pair<__uint128_t, unsigned int>> &data, __uint128_t community);
+map<__uint128_t, unsigned int> build_pdata(const vector<pair<__uint128_t, unsigned int>> &data, __uint128_t community);
 double icc_evidence(__uint128_t community, Partition &p_struct);
 double get_evidence(__uint128_t community, Partition &p_struct);
 

@@ -8,14 +8,14 @@ void simulated_annealing(Partition &p_struct,
 	unsigned int max_iterations, 
 	unsigned int max_no_improve) {
 
-	cout << "\n- running simulated annealing algorithm\n" << endl; 
+	cout << "\n- running simulated annealing algorithm\n" << "\n"; 
 
 	unsigned int f;
     unsigned int iterations = 0;
     unsigned int steps_since_improve = 0;
 
     // annealing parameters
-    double T0 = 100; // initial annealing temperature
+    double T0 = 100.0; // initial annealing temperature
     p_struct.T = T0;
     unsigned int update_schedule = 100; // number of iterations at same annealing temperature
 
@@ -59,7 +59,7 @@ void simulated_annealing(Partition &p_struct,
 			p_struct.best_log_evidence = p_struct.current_log_evidence;
 			p_struct.best_partition = p_struct.current_partition;
 
-			cout << "best log-evidence: " << p_struct.best_log_evidence << "\t@T = " << p_struct.T << "\ti = " << i << endl;
+			cout << "best log-evidence: " << p_struct.best_log_evidence << "\t@T = " << p_struct.T << "\ti = " << i << "\n";
 			
 			steps_since_improve = 0;
 
@@ -69,7 +69,7 @@ void simulated_annealing(Partition &p_struct,
 
 		// stop if no improvement 
 		if (steps_since_improve > max_no_improve){
-			cout << "\n- maximum iterations without improvement reached" << endl;
+			cout << "\n- maximum iterations without improvement reached" << "\n";
 			break;
 		}
     }
@@ -77,7 +77,8 @@ void simulated_annealing(Partition &p_struct,
     // performance 
     auto end = chrono::system_clock::now();
 	chrono::duration<double> elapsed = end - start;
-	cout << "- iterations per second: " << static_cast <double> (iterations) / elapsed.count() << "\n" << endl;
+	double its_per_second = static_cast <double> (iterations) / elapsed.count();
+	cout << "- iterations per second: " << its_per_second << "\n" << "\n";
 
 	// at completion, make sure current partition is equal to best partition
 	p_struct.current_log_evidence = p_struct.best_log_evidence;

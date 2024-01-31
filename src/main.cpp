@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     	if (arg == "-i") {
     		fname = argv[i+1];
     		i++;
-    		cout << "- input file: " << fname << endl;
+    		cout << "- input file: " << fname << "\n";
     	}
 
     	// input partition
@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
     		pname = argv[i+1];
     		pload = true;
     		i++;
-    		cout << "- input partition: " << pname << endl;
+    		cout << "- input partition: " << pname << "\n";
     	}
 
         // start from random partition
@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 
     cout << "- max iterations (stop): ";
     cout << max_iterations;
-    cout << " (" << max_no_improve << ")\n" << endl;
+    cout << " (" << max_no_improve << ")\n" << "\n";
     // =================================
 
     // initialize partition and load data
@@ -109,8 +109,8 @@ int main(int argc, char **argv) {
 
     if (greedy) {
         greedy_merging(p_struct);
-        cout << "- current log-evidence (after GMA): " << p_struct.current_log_evidence << endl;
-        cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << endl;
+        cout << "- current log-evidence (after GMA): " << p_struct.current_log_evidence << "\n";
+        cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << "\n";
         
     }
 
@@ -122,11 +122,9 @@ int main(int argc, char **argv) {
 
     auto end = chrono::system_clock::now();
     chrono::duration<double> elapsed = end - start;
-    cout << "- elapsed time      : " << elapsed.count() << "s" << endl;
-    
-
-    cout << "- current log-evidence (after SAA): " << p_struct.current_log_evidence << endl;
-    cout << "- best log-evidence (after SAA):    " << p_struct.best_log_evidence << endl;
+    cout << "- elapsed time      : " << elapsed.count() << "s" << "\n";
+    cout << "- current log-evidence (after SAA): " << p_struct.current_log_evidence << "\n";
+    cout << "- best log-evidence (after SAA):    " << p_struct.best_log_evidence << "\n";
 
 
 	// print and save best partition
@@ -134,14 +132,14 @@ int main(int argc, char **argv) {
 	string spath = "../output/stats/" + fname + "_stats.dat";
 	ofstream comm_file(cpath);
 	ofstream stat_file(spath);
-	stat_file << "best log-evidence: " << p_struct.best_log_evidence << endl;
-    cout << "final log-evidence: " << p_struct.best_log_evidence << endl;
-    cout << "final community: " << endl;
+	stat_file << "best log-evidence: " << p_struct.best_log_evidence << "\n";
+    cout << "final log-evidence: " << p_struct.best_log_evidence << "\n";
+    cout << "final community: " << "\n";
 	for(unsigned int i = 0; i < n; i++){
 		__uint128_t community = p_struct.best_partition[i];
 		if (bit_count(community) > 0){
-			cout << i << "\t" << int_to_bitstring(community, n) << " | size: " << bit_count(community) << endl;
-			comm_file << int_to_bitstring(community, n) << endl;
+			cout << i << "\t" << int_to_bitstring(community, n) << " | size: " << bit_count(community) << "\n";
+			comm_file << int_to_bitstring(community, n) << "\n";
 		}
 	}   
 	comm_file.close(); 
