@@ -1,6 +1,4 @@
 #include "header.h"
-
-
 #include <ctime> // for chrono
 #include <ratio> // for chrono
 #include <chrono> // for chrono
@@ -14,7 +12,6 @@ int main(int argc, char **argv) {
     srand(randDevice());
     // ========================
 
-
     // ==== declarations ======
     bool pload = false; // load partition
     bool rload = false;
@@ -23,12 +20,10 @@ int main(int argc, char **argv) {
     string fname, pname;
     // ========================
 
-
     // ==== default values ====
     unsigned int max_iterations = 50000;
     unsigned int max_no_improve = 10000;
     // ========================
-
 
     // ==== parse runtime arguments ====
     unsigned int n;
@@ -106,8 +101,7 @@ int main(int argc, char **argv) {
     if (greedy) {
         greedy_merging(p_struct);
         cout << "- current log-evidence (after GMA): " << p_struct.current_log_evidence << "\n";
-        cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << "\n";
-        
+        cout << "- best log-evidence (after GMA):    " << p_struct.best_log_evidence << "\n";  
     }
 
     // main algorithm 
@@ -121,7 +115,6 @@ int main(int argc, char **argv) {
     cout << "- elapsed time      : " << elapsed.count() << "s" << "\n";
     cout << "- current log-evidence (after SAA): " << p_struct.current_log_evidence << "\n";
     cout << "- best log-evidence (after SAA):    " << p_struct.best_log_evidence << "\n";
-
 
     // print and save best partition
     string cpath = "../output/comms/" + fname + "_comms.dat";

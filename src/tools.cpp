@@ -1,6 +1,4 @@
-
 #include "header.h"
-
 
 bool DoubleSame(double a, double b){
 	return fabs(a-b) < EPSILON;

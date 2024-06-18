@@ -8,8 +8,8 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
-#include <omp.h>
-#include <execution>
+// #include <omp.h>
+// #include <execution>
 
 using namespace std;
 
