@@ -14,7 +14,7 @@ void greedy_merging(Partition &p_struct) {
     unsigned int best_i, best_j, last_i;
     best_i = best_j = last_i = 0;
 
-    map<__uint128_t, double> evidence_memo;
+    // map<__uint128_t, double> evidence_memo;
 
     while (best_delta > 0) {
 

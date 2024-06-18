@@ -33,9 +33,7 @@ void merge_partition(Partition &p_struct){
 		if ((p_struct.occupied_partitions_gt2_nodes & (ONE << p1)) == 0){
 			p_struct.occupied_partitions_gt2_nodes += (ONE << p1);
 		}	
-
 	}
-
 }
 
 void split_partition(Partition &p_struct){
@@ -64,7 +62,6 @@ void split_partition(Partition &p_struct){
 	double p = std::exp(delta_log_evidence/p_struct.T);
 	double u = static_cast <double> (rand()) / static_cast <double> (RAND_MAX);
 
-
 	if (p > u){
 		// find empty spot for second split community
 		unsigned int p2 = randomBitIndex(~p_struct.occupied_partitions - p_struct.unused_bits);
@@ -83,9 +80,7 @@ void split_partition(Partition &p_struct){
 		if (bit_count(c2) >= 2){
 			p_struct.occupied_partitions_gt2_nodes += (ONE << p2);
 		}		
-
 	}
-
 }
 
 void switch_partition(Partition &p_struct){
@@ -123,8 +118,6 @@ void switch_partition(Partition &p_struct){
 		if ((bit_count(c2) <= 1) && (bit_count(new_c2) >= 2)){
 			p_struct.occupied_partitions_gt2_nodes += (ONE << p2);
 		} 
-
 	}
-
 }
 

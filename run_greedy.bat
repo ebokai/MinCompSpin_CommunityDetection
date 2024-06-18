@@ -1,3 +1,3 @@
 cd bin
-saa.exe 100 -i my_data_n100_N1000 -g -s 
+saa.exe 116 -i 169040 -g -s 
 pause
