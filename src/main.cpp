@@ -9,12 +9,8 @@ using namespace std::chrono;
 
 int main(int argc, char **argv) {
 
-
-
-
-
-	// ==== initialize RNG ====
- 	random_device randDevice;
+    // ==== initialize RNG ====
+    random_device randDevice;
     srand(randDevice());
     // ========================
 
@@ -40,49 +36,49 @@ int main(int argc, char **argv) {
 
     for (int i = 2; i < argc; i++) {
 
-    	string arg = argv[i];
+        string arg = argv[i];
 
-    	// input data
-    	if (arg == "-i") {
-    		fname = argv[i+1];
-    		i++;
-    		cout << "- input file: " << fname << "\n";
-    	}
+        // input data
+        if (arg == "-i") {
+            fname = argv[i+1];
+            i++;
+            cout << "- input file: " << fname << "\n";
+        }
 
-    	// input partition
-    	if (arg == "-p") {
-    		pname = argv[i+1];
-    		pload = true;
-    		i++;
-    		cout << "- input partition: " << pname << "\n";
-    	}
+        // input partition
+        if (arg == "-p") {
+            pname = argv[i+1];
+            pload = true;
+            i++;
+            cout << "- input partition: " << pname << "\n";
+        }
 
         // start from random partition
-    	if (arg == "-r") {
-    		rload = true;
-    	}
+        if (arg == "-r") {
+            rload = true;
+        }
 
         // perform greedy merhing
-    	if (arg == "-g") {
-    		greedy = true;
-    	}
+        if (arg == "-g") {
+            greedy = true;
+        }
 
         // turn annealing off (greedy only)
         if (arg == "-s") {
             anneal = false;
         }
 
-    	// maximum iterations
-    	if (arg == "--max") {
-    		max_iterations = stoi(argv[i+1]);
-    		i++;
-    	}
+        // maximum iterations
+        if (arg == "--max") {
+            max_iterations = stoi(argv[i+1]);
+            i++;
+        }
 
-    	// stopping iterations
-    	if (arg == "--stop") {
-    		max_no_improve = stoi(argv[i+1]);
-    		i++;
-    	}
+        // stopping iterations
+        if (arg == "--stop") {
+            max_no_improve = stoi(argv[i+1]);
+            i++;
+        }
     }
 
     // have to do something 
@@ -98,11 +94,11 @@ int main(int argc, char **argv) {
     get_data(fname, p_struct);
 
     if (pload) {
-    	load_partition(p_struct, pname);
+        load_partition(p_struct, pname);
     } else if (rload) {
-    	random_partition(p_struct);
+        random_partition(p_struct);
     } else {
-    	independent_partition(p_struct);
+        independent_partition(p_struct);
     }
 
     auto start = chrono::system_clock::now();
@@ -127,23 +123,23 @@ int main(int argc, char **argv) {
     cout << "- best log-evidence (after SAA):    " << p_struct.best_log_evidence << "\n";
 
 
-	// print and save best partition
-	string cpath = "../output/comms/" + fname + "_comms.dat";
-	string spath = "../output/stats/" + fname + "_stats.dat";
-	ofstream comm_file(cpath);
-	ofstream stat_file(spath);
-	stat_file << "best log-evidence: " << p_struct.best_log_evidence << "\n";
+    // print and save best partition
+    string cpath = "../output/comms/" + fname + "_comms.dat";
+    string spath = "../output/stats/" + fname + "_stats.dat";
+    ofstream comm_file(cpath);
+    ofstream stat_file(spath);
+    stat_file << "best log-evidence: " << p_struct.best_log_evidence << "\n";
     cout << "final log-evidence: " << p_struct.best_log_evidence << "\n";
     cout << "final community: " << "\n";
-	for(unsigned int i = 0; i < n; i++){
-		__uint128_t community = p_struct.best_partition[i];
-		if (bit_count(community) > 0){
-			cout << i << "\t" << int_to_bitstring(community, n) << " | size: " << bit_count(community) << "\n";
-			comm_file << int_to_bitstring(community, n) << "\n";
-		}
-	}   
-	comm_file.close(); 
-	stat_file.close(); 
+    for(unsigned int i = 0; i < n; i++){
+        __uint128_t community = p_struct.best_partition[i];
+        if (bit_count(community) > 0){
+            cout << i << "\t" << int_to_bitstring(community, n) << " | size: " << bit_count(community) << "\n";
+            comm_file << int_to_bitstring(community, n) << "\n";
+        }
+    }   
+    comm_file.close(); 
+    stat_file.close(); 
 
     return 0;
 
