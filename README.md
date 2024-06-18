@@ -15,17 +15,17 @@ The algorithm can change the partition in three ways:
 The GM algorithm starts from an independent partition where each node is assigned to a separate community. It then checks all possible mergers of two communities and accept the merger that increases the log-evidence by the largest amount. The algorithm stops when there is no possible increase in log-evidence or when all nodes have been assigned to the same community. This algorithm is much faster than the SA algorithm but may not converge to the optimal solution. A useful approach is therefore to use the best partition found with the GM algorithm as the initial condition for the SA algorithm (see "How to use").
 
 ## Requirements
-The code uses C++ version 11.
+The code uses C++ version 17.
 
 ## Installation
 
 ### Windows
 
-The code can be compiled using the `compile.bat` batch file in the main folder. This creates an `saa.exe` executable file in the `./bin` folder. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp -o ./bin/saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis. This file also shows the use of the optional flags `--max` and `--stop`.
+The code can be compiled using the `compile.bat` batch file in the main folder. This creates an `saa.exe` executable file in the `./bin` folder. Alternatively, the code can be compiled using the command `g++ -std=c++17 -O3 -Wall ./src/*.cpp -o ./bin/saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis. This file also shows the use of the optional flags `--max` and `--stop`.
 
 ### Linux / macOS
 
-The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp -o ./bin/saa.out`.
+The code can be compiled using the command `g++ -std=c++17 -O3 -Wall ./src/*.cpp -o ./bin/saa.out`.
 
 ## Tutorial
 
