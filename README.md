@@ -1,31 +1,16 @@
 ## Community detection using Minimally Complex Models: Simulated annealing algorithm
-
-This program contains two algorithms, greedy merging (GM) and simulated annealing (SA), for finding community structures in binary data of up to 128 variables by using inference based on a class of spin models (maximum entropy models for binary data) called Minimally Complex Models (MCM). 
-### Simulated annealing
-The SA algorithm works by calculating the log-evidence $\log E$ for a given initial partition $C_i$ (community structure). It then proposes slight changes to the partition and calculates the difference in log-evidence $\Delta \log E$. 
-If the new partition $C_{i+1}$ has a larger log-evidence $\Delta \log E > 0$, the new partition is accepted. If not, the partition is still accepted with probability $P(C_{i+1}=C_i)\sim \exp(\Delta \log E/T_A)$ where $T_A$ is the annealing temperature. This parameter controls how likely the new partition is accepted. At large values, this prevents getting stuck in locally optimal solutions. 
-During the search the annealing temperature is gradually lowered allowing the algorithm to converge to an optimal solution. This is done according to a logarithmic cooldown schedule where the annealing temperature at iteration $i$ is given by $T_A(i)=T_0/(1+\log(1+i))$.
-See https://en.wikipedia.org/wiki/Simulated_annealing for more details.
-
-The algorithm can change the partition in three ways:
-- merge: two communities are merged into a single community
-- split: a single community is split into two communities (not necessarily of the same size)
-- switch: a node from one community is placed inside another community
-### Greedy merging
-The GM algorithm starts from an independent partition where each node is assigned to a separate community. It then checks all possible mergers of two communities and accept the merger that increases the log-evidence by the largest amount. The algorithm stops when there is no possible increase in log-evidence or when all nodes have been assigned to the same community. This algorithm is much faster than the SA algorithm but may not converge to the optimal solution. A useful approach is therefore to use the best partition found with the GM algorithm as the initial condition for the SA algorithm (see "How to use").
-
 ## Requirements
-The code uses C++ version 11.
+The code uses C++ version 17.
 
 ## Installation
 
 ### Windows
 
-The code can be compiled using the `compile.bat` batch file in the main folder. This creates an `saa.exe` executable file in the `./bin` folder. Alternatively, the code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp -o ./bin/saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis. This file also shows the use of the optional flags `--max` and `--stop`.
+The code can be compiled using the `compile.bat` batch file in the main folder. This creates an `saa.exe` executable file in the `./bin` folder. Alternatively, the code can be compiled using the command `g++ -std=c++17 -O3 -Wall ./src/*.cpp -o ./bin/saa.exe`. There is an additional batch file `compile_and_run.bat` which is useful for testing purposes. It compiles the code and then runs an analysis. This file also shows the use of the optional flags `--max` and `--stop`.
 
 ### Linux / macOS
 
-The code can be compiled using the command `g++ -std=c++11 -O3 -Wall ./src/*.cpp -o ./bin/saa.out`.
+The code can be compiled using the command `g++ -std=c++17 -O3 -Wall ./src/*.cpp -o ./bin/saa.out`.
 
 ## Tutorial
 
@@ -36,6 +21,19 @@ A tutorial in the form of a jupyter notebook has been provided in the `./doc/` d
 The code is run from the executable file `saa.exe` (on Windows) or `saa.out` (on Linux/Mac) in the `bin` folder. The program should be called with the number of variables `n` and the filename of the dataset as required arguments. The data is assumed to be in the `./input/data` folder and should end with `.dat` extension. The data should be encoded as binary strings, e.g. `11001110010` which are read from right to left. The maximum number of variables is 128.
 
 - To see an example, run the `run.bat` batch file from the main folder (on Windows).
+
+This program contains two algorithms, greedy merging (GM) and simulated annealing (SA), for finding community structures in binary data of up to 128 variables by using inference based on a class of spin models (maximum entropy models for binary data) called Minimally Complex Models (MCM). 
+### Simulated annealing
+The SA algorithm works by calculating the log-evidence $\log E$ for a given initial partition $C_i$ (community structure). It then proposes changes to the partition.
+If the new partition $C_{i+1}$ has a larger log-evidence $\Delta \log E > 0$, the new partition is accepted. If not, the partition is accepted with probability $P(C_{i+1}=C_i)\sim \exp(\Delta \log E/T_A)$ where $T_A$ is the annealing temperature. This parameter controls the probability of accepting a partition with a lower log-evidence. This prevents getting stuck in locally optimal solutions. See https://en.wikipedia.org/wiki/Simulated_annealing for more details.
+
+The algorithm can change the partition in three ways:
+- merge: two communities are merged into a single community
+- split: a single community is split into two communities (not necessarily of the same size)
+- switch: a node from one community is placed inside another community
+### Greedy merging
+The GM algorithm starts from an independent partition where each node is assigned to a separate community. It then checks all possible mergers of two communities and accept the merger that increases the log-evidence by the largest amount. The algorithm stops when there is no possible increase in log-evidence or when all nodes have been assigned to the same community. This algorithm is much faster than the SA algorithm but may not converge to the optimal solution. A useful approach is therefore to use the best partition found with the GM algorithm as the initial condition for the SA algorithm (see "How to use").
+
 
 ### How to use:
 
